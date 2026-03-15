@@ -7,6 +7,7 @@ use App\Application\Contact\DTO\ContactUpdateDTO;
 use App\Domain\Contact\Services\ContactService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Contact\ContactFormRequest;
+use App\Models\Contact;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 
@@ -43,23 +44,23 @@ class ContactController extends Controller
         return view('contacts.show', compact('data'));
     }
 
-    public function edit(int $id): View
+    public function edit(Contact $contact): View
     {
-        $data = $this->service->show($id);
+        $data = $this->service->show($contact->id);
         return view('contacts.edit', compact('data'));
     }
 
-    public function update(ContactFormRequest $request, int $id): RedirectResponse
+    public function update(ContactFormRequest $request, Contact $contact): RedirectResponse
     {
-        $dto = ContactUpdateDTO::makeFromArray($request->validated(), $id);
+        $dto = ContactUpdateDTO::makeFromArray($request->validated(), $contact->id);
         $this->service->update($dto);
 
         return redirect()->back()->with('success', 'Contact updated.');
     }
 
-    public function destroy(int $id): RedirectResponse
+    public function destroy(Contact $contact): RedirectResponse
     {
-        $this->service->delete($id);
+        $this->service->delete($contact->id);
         return redirect()->route('contacts.index')->with('success', 'Contact deleted.');
     }
 }

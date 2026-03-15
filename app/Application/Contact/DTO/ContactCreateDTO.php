@@ -13,9 +13,9 @@ class ContactCreateDTO
     public static function makeFromArray(array $data): self
     {
         return new self(
-            $data['name'],
-            $data['contact'],
-            $data['email']
+            name: $data['name'],
+            contact: $data['contact'],
+            email: $data['email']
         );
     }
 }

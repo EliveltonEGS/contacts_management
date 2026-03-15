@@ -22,7 +22,7 @@ class ContactFormRequest extends FormRequest
      */
     public function rules(): array
     {
-        $id = $this->route('contact');
+        $contact = $this->route('contact');
 
         return [
             'name' => ['required', 'min:6', 'max:80'],
@@ -30,16 +30,15 @@ class ContactFormRequest extends FormRequest
             'contact' => [
                 'required',
                 'digits:9',
-                Rule::unique('contacts', 'contact')->ignore($id),
+                Rule::unique('contacts', 'contact')->ignore($contact),
             ],
 
             'email' => [
                 'required',
                 'email',
                 'max:80',
-                Rule::unique('contacts', 'email')->ignore($id),
+                Rule::unique('contacts', 'email')->ignore($contact),
             ],
         ];
-        $id = $this->route('id');
     }
 }

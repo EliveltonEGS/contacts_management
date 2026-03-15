@@ -20,9 +20,7 @@
             >
 
             @error('name')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
+                <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
         <div class="mb-3">
@@ -34,9 +32,7 @@
                 value="{{ old('contact', $data->contact) }}"
             >
             @error('contact')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
+                <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
         <div class="mb-3">
@@ -48,9 +44,7 @@
                 value="{{ old('email', $data->email) }}"
             >
             @error('email')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
+                <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
         <div class="mb-3">

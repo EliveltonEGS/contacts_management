@@ -9,10 +9,10 @@
         <label>Name: {{ $data->name }}</label>
     </div>
     <div class="mb-3">
-        <label>Contact: {{ $data->name }}</label>
+        <label>Contact: {{ $data->contact }}</label>
     </div>
     <div class="mb-3">
-        <label>Email: Contact: {{ $data->name }}</label>
+        <label>Email: Contact: {{ $data->email }}</label>
     </div>
     <div class="mb-3 d-flex gap-2">
         <a 
@@ -22,7 +22,7 @@
         <form action="{{ route('contacts.destroy', $data->id) }}" method="POST">
             @csrf
             @method('DELETE')
-            <button class="btn btn-danger" type="submit">Delete</button>
+            <button class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir?')" type="submit">Delete</button>
         </form>
     </div>
 @endsection

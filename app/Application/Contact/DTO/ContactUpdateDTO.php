@@ -14,10 +14,10 @@ class ContactUpdateDTO
     public static function makeFromArray(array $data, int $id): self
     {
         return new self(
-            $id,
-            $data['name'],
-            $data['contact'],
-            $data['email']
+            id: $id,
+            name: $data['name'],
+            contact: $data['contact'],
+            email: $data['email']
         );
     }
 }
