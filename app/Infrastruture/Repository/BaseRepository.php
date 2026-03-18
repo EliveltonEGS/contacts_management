@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Infrastruture\Persistentece\Repository;
+namespace App\Infrastruture\Repository;
 
-use App\Infrastruture\Persistentece\Repository\Contracts\BaseRepositoyInterface;
+use App\Infrastruture\Repository\Contracts\BaseRepositoyInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -17,9 +17,9 @@ abstract class BaseRepository implements BaseRepositoyInterface
         return $this->model->orderBy('id', 'desc')->paginate(5);
     }
 
-    public function show(int $id): ?Model
+    public function find(int $id): ?Model
     {
-        return $this->model->find($id);
+        return $this->model->findOrFail($id);
     }
 
     public function create(array $data): Model
@@ -29,7 +29,7 @@ abstract class BaseRepository implements BaseRepositoyInterface
 
     public function update(int $id, array $data): ?Model
     {
-        $entity = $this->show($id);
+        $entity = $this->find($id);
 
         if (! $entity) {
             return null;
@@ -42,7 +42,7 @@ abstract class BaseRepository implements BaseRepositoyInterface
 
     public function delete(int $id): bool
     {
-        $entity = $this->show($id);
+        $entity = $this->find($id);
 
         return $entity ? (bool) $entity->delete() : false;
     }

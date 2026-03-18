@@ -49,9 +49,12 @@
                                 </li>
                             @endif
                         @else
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('persons.index') }}">{{ __('Persons') }}</a>
+                            </li>
                              <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('contacts.index') }}">{{ __('Contacts') }}</a>
-                                </li>
+                                <a class="nav-link" href="{{ route('contacts.index') }}">{{ __('Contacts') }}</a>
+                            </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}

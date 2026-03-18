@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Domain\Person\Repository\Contracts\PersonRepositoryInterface;
+use App\Domain\Person\Repository\PersonRepository;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 
@@ -12,7 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(PersonRepositoryInterface::class, PersonRepository::class);
     }
 
     /**

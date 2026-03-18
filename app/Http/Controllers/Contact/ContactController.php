@@ -38,9 +38,9 @@ class ContactController extends Controller
             ->with('success', 'Contact created.');
     }
 
-    public function show(int $id): View
+    public function show(Contact $contact): View
     {
-        $data = $this->service->show($id);
+        $data = $this->service->show($contact->id);
         return view('contacts.show', compact('data'));
     }
 

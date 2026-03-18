@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Contact\ContactController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Person\PersonController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -28,3 +29,5 @@ Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.ind
 Route::middleware('auth')->group(function () {
     Route::resource('contacts', ContactController::class)->except(['index']);
 });
+
+Route::resource('/persons', PersonController::class);

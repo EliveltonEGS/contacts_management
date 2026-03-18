@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>List</h1>
-    
+    <h1>List Persons</h1>
+
     <div class="mt-2 mb-2">
-        <a href="{{ route('contacts.create') }}" class="btn btn-info">New</a>
+        <a href="{{ route('persons.create') }}" class="btn btn-info">New</a>
     </div>
     @if (session()->has('success'))
         <div class="alert alert-success" role="alert">
@@ -16,36 +16,36 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
-                <th scope="col">Contact</th>
                 <th scope="col">Email</th>
+                <th scope="col">Image</th>
                 <th >Actions</th>
             </tr>
         </thead>
         <tbody>
-            @forelse ($data as $item)
-            <tr>
-                <th scope="row">{{ $item->id }}</th>
-                <td>{{ $item->name }}</td>
-                <td>{{ $item->contact }}</td>
-                <td>{{ $item->email }}</td>
+            @forelse ($persons as $person)
+                <tr>
+                <th scope="row">{{ $person->id }}</th>
+                <td>{{ $person->name }}</td>
+                <td>{{ $person->email }}</td>
+                <td>{{ $person->avatar_url ?? '--' }}</td>
                 <td>
                     <div class="d-flex gap-2">
-                        <a href="{{ route('contacts.show', $item->id) }}" class="btn btn-warning">Show</a>
-                        <a href="{{ route('contacts.edit', $item->id) }}" class="btn btn-warning">Edit</a>
-                        <form action="{{ route('contacts.destroy', $item->id) }}" method="POST">
+                        <a href="{{ route('persons.show', $person->id) }}" class="btn btn-warning">Show</a>
+                        <a href="{{ route('persons.edit', $person->id) }}" class="btn btn-warning">Edit</a>
+                        <form action="{{ route('persons.destroy', $person->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir?')" type="submit">Delete</button>
                         </form>
-                </div>
+                    </div>
                 </td>
             </tr>
             @empty
-            <tr>
-            <td colspan="5">Empty contacts.</td> 
-            </tr>
+                <tr>
+                    <td colspan="5">Empty persons.</td>
+                </tr>
             @endforelse
         </tbody>
     </table>
-    {{ $data->links('pagination::bootstrap-5') }}
+    {{ $persons->links('pagination::bootstrap-5') }}
 @endsection
