@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Domain\Person\UseCase;
+namespace App\Application\Person\UseCase;
 
 use App\Domain\Person\Services\AvatarService;
 use App\Domain\Person\Services\PersonService;
-use App\Models\Person;
+use App\Entities\Person;
 
 class DeletePersonUseCase
 {

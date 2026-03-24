@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Person;
 
-use App\Application\Person\DTO\PersonCreateDTO;
-use App\Application\Person\DTO\PersonUpdateDTO;
-use App\Domain\Person\UseCase\CreatePersonUseCase;
-use App\Domain\Person\UseCase\DeletePersonUseCase;
-use App\Domain\Person\UseCase\FindPersonUseCase;
-use App\Domain\Person\UseCase\GetAllPersonUseCase;
-use App\Domain\Person\UseCase\UpdatePersonUseCase;
+use App\Application\Person\DTO\PersonDTO;
+use App\Application\Person\UseCase\{
+    CreatePersonUseCase,
+    DeletePersonUseCase,
+    FindPersonUseCase,
+    GetAllPersonUseCase,
+    UpdatePersonUseCase
+};
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Person\PersonFormRequest;
 use App\Models\Person;
@@ -38,19 +39,12 @@ class PersonController extends Controller
 
     public function store(PersonFormRequest $request): RedirectResponse
     {
-        try {
-            $dto = PersonCreateDTO::makeFromArray($request->validated());
-            $this->createPersonUseCase->execute($dto);
+        $dto = PersonDTO::makeFromArray($request->validated());
+        $this->createPersonUseCase->execute($dto->toEntity());
 
-            return redirect()
-                ->back()
-                ->with('success', 'Person created successfully.');
-        } catch (\Throwable $e) {
-            return redirect()
-                ->back()
-                ->withInput()
-                ->with('error', $e->getMessage());
-        }
+        return redirect()
+            ->back()
+            ->with('success', 'Person created successfully.');
     }
 
     public function show(Person $person): View
@@ -67,19 +61,12 @@ class PersonController extends Controller
 
     public function  update(PersonFormRequest $request, Person $person): RedirectResponse
     {
-        try {
-            $dto = PersonUpdateDTO::makeFromArray($request->validated(), $person->id);
-            $this->updatePersonUseCase->execute($dto);
+        $dto = PersonDTO::makeFromArray($request->validated(), $person->id);
+        $this->updatePersonUseCase->execute($dto->toEntity());
 
-            return redirect()
-                ->back()
-                ->with('success', 'Person updated successfully.');
-        } catch (\Throwable $e) {
-            return redirect()
-                ->back()
-                ->withInput()
-                ->with('error', $e->getMessage());
-        }
+        return redirect()
+            ->back()
+            ->with('success', 'Person updated successfully.');
     }
 
     public function destroy(Person $person): RedirectResponse
