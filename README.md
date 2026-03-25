@@ -15,9 +15,15 @@
 ## Permitir a exclusão de um registro existente.
 Um contato é uma entidade com **4 campos**:
 - id
-- name
-- contact(phone)
+- person_id
+- ddd
+- number(phone)
 - email
+
+Uma pessoa é uma entidade com **3 campos**
+- id
+- name
+- avatar(image)
 
 Regras: 
 - O nome deve ser uma string com tamanho maior que 5 caracteres.
