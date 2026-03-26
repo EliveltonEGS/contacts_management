@@ -2,11 +2,11 @@
 
 namespace App\Infrastruture\Repository;
 
-use App\Infrastruture\Repository\Contracts\BaseRepositoyInterface;
+use App\Infrastruture\Repository\Contracts\BaseRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-abstract class BaseRepository implements BaseRepositoyInterface
+abstract class BaseRepository implements BaseRepositoryInterface
 {
     public function __construct(
         private Model $model
@@ -19,7 +19,7 @@ abstract class BaseRepository implements BaseRepositoyInterface
 
     public function find(int $id): ?Model
     {
-        return $this->model->findOrFail($id);
+        return $this->model->find($id);
     }
 
     public function create(array $data): Model

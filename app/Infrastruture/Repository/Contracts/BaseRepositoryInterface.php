@@ -5,7 +5,7 @@ namespace App\Infrastruture\Repository\Contracts;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-interface BaseRepositoyInterface
+interface BaseRepositoryInterface
 {
     public function all(): LengthAwarePaginator;
     public function find(int $id): ?Model;
