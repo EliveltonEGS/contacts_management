@@ -66,4 +66,12 @@ class PersonRepository implements PersonRepositoryInterface
     {
         return $this->personModel->orderBy('name')->get();
     }
+
+    public function search(Person $person, int $perPage = 15): LengthAwarePaginator
+    {
+        return $this->personModel
+            ->where('name', 'like', '%' . $person->getName() . '%')
+            ->orderBy('name')
+            ->paginate($perPage);
+    }
 }

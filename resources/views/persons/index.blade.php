@@ -4,7 +4,13 @@
     <h1>List Persons</h1>
 
     <div class="mt-2 mb-2">
-        <a href="{{ route('persons.create') }}" class="btn btn-info">New</a>
+        <form method="GET" action="{{ route('persons.index') }}">
+            <div class="d-flex gap-2">
+                <input class="form-control" type="text" name="name" placeholder="Pesquisar por nome">
+                <button class="btn btn-primary" type="submit">Buscar</button>
+                <a href="{{ route('persons.create') }}" class="btn btn-info">New</a>
+            </div>
+        </form>
     </div>
     @if (session()->has('success'))
         <div class="alert alert-success" role="alert">

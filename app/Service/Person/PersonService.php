@@ -51,4 +51,9 @@ class PersonService
     {
         return $this->personRepository->all();
     }
+
+    public function search(PersonDTO $dto, int $perPage): LengthAwarePaginator
+    {
+        return $this->personRepository->search($dto->toEntity(), $perPage);
+    }
 }

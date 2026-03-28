@@ -13,4 +13,5 @@ interface PersonRepositoryInterface
     public function save(Person $person): Person;
     public function delete(int $id): void;
     public function all(): Collection;
+    public function search(Person $person, int $perPage = 15): LengthAwarePaginator;
 }

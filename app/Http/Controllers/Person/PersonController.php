@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Person\PersonFormRequest;
 use App\Service\Person\PersonService;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class PersonController extends Controller
@@ -15,9 +16,13 @@ class PersonController extends Controller
         private PersonService $personService
     ) {}
 
-    public function index(): View
+    public function index(Request $request): View
     {
-        $persons = $this->personService->paginate(5);
+        $dto = PersonDTO::makeFromArray($request->only('name'));
+        $persons = $request->filled('name')
+            ? $this->personService->search($dto, 5)
+            : $this->personService->paginate(5);
+
         return view('persons.index', compact('persons'));
     }
 
